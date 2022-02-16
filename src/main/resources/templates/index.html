@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Employee Management</h1>
+
+        <!-- <form th:action="@{/filter/{keyword}(keyword=${response.query})}"> -->
+        <form th:action="@{/filter}">
+            Filter:<input type="text" th:name="keyword">
+            <button type="submit">Search</button>
+            &nbsp;&nbsp;
+            <input type="button" value="Clear" onclick="clearFilter()">
+        </form>
+        <a href="newEmployee">Add New Employee </a>
+        <br>
+        <br>
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${employee}">
+                    <td th:text="${employee.fname}">First Name</td>
+                    <td th:text="${employee.lname}">Last Name</td>
+                    <td th:text="${employee.email}">Email</td>
+                    <td th:text="${employee.role}">Post</td>
+                    <td><a th:href="@{'/edit/'+${employee.id}}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/'+${employee.id}}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function clearFilter(){
+            window.location='/home'
+        }
+    </script>
+</body>
+</html>
